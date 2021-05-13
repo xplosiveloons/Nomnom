@@ -25,7 +25,7 @@ def failure_response(error, code=404):
 
 @app.route("/api/recipes/")
 def get_all_recipes():
-    return success_response([r.simple_serialize() for r in Recipe.query.all()]) 
+    return success_response([r.serialize() for r in Recipe.query.all()]) 
 
 @app.route("/api/recipes/favorited/")
 def get_all_favorited_recipes():
@@ -55,7 +55,7 @@ def get_recipe(recipe_id):
     recipe=Recipe.query.filter_by(id=recipe_id).first()
     if recipe is None:
         return failure_response("Recipe not found")
-    return success_response(recipe.simple_serialize())
+    return success_response(recipe.serialize())
 
 
 @app.route("/api/recipes/<int:recipe_id>/", methods =["DELETE"])
